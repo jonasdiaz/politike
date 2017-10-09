@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
     inject = require('gulp-inject'),
-    connect = require('gulp-connect');
+    connect = require('gulp-connect'),
+    angularFilesort = require('gulp-angular-filesort'),
     wiredep = require('wiredep').stream;
 
 var sources = {
@@ -22,36 +23,37 @@ gulp.task('saludar', function(){
 });
 
 gulp.task('index', function(){
-  var target = gulp.src('./src/index.html');
-  // It's not necessary to read the files (will speed up things), we're only after their paths:
-  var sources = gulp.src(['./src/**/*.js', './src/**/*.css'], {read: false});
-
-  return target.pipe(inject(sources))
+  return gulp.src('index.html', {cwd: './src'})
+    .pipe(inject(
+      gulp.src(['./src/js/controllers/*.js', './src/js/services/**/*.js']).pipe(angularFilesort()), {
+      ignorePath: '/src'
+    }))
+    .pipe(inject(
+      gulp.src(['./src/css/**/*.css']), {
+        ignorePath: '/src'
+      }
+    ))
     .pipe(gulp.dest('./src'));
 });
 
 gulp.task('html', function () {
-  gulp.src(['./src/*.html', './src/**/*.js', './src/**/*.css'])
+  gulp.src(['./src/*.html', './src/js/*.js', './src/css/*.css'])
     .pipe(connect.reload());
 });
 
-gulp.task('bower', function () {
-  /*gulp.src('./src/footer.html')
-    .pipe(wiredep({
-      optional: 'configuration',
-      goes: 'here'
-    }))
-    .pipe(gulp.dest('./src'));*/
-    gulp.src('src/index.html')
-    .pipe(wiredep({
-      directory: 'bower_components',
-      ignorePath: /^(\.\.\/)*\.\./
-    }))
-    .pipe(gulp.dest('src'));
+gulp.task('wiredep', function () {
+  gulp.src('./src/index.html')
+  .pipe(wiredep({
+    directory: './src/lib'
+  }))
+  .pipe(gulp.dest('./src'));
 });
 
-gulp.task('watch', function () {
-  gulp.watch(['./src/*.html'], ['html', 'index', 'bower']);
+gulp.task('watch', function() {
+  gulp.watch(['./src/**/*.html'], ['html']);
+  //gulp.watch(['./src/css/**/*.css'], ['css', 'index']);
+  gulp.watch(['./src/js/**/*.js', './Gulpfile.js'], ['index']);
+  gulp.watch(['./bower.json'], ['wiredep']);
 });
 
-gulp.task('default', ['index', 'bower', 'connect', 'watch']);
+gulp.task('default', ['connect', 'index', 'wiredep', 'watch']);
