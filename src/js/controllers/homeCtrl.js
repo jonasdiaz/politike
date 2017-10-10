@@ -11,6 +11,7 @@
     //$scope.series = ['Serie A', 'Serie B'];
     function createChart(){
       $scope.data_import = [];
+      //$scope.data = [];
       var i = 0, value = [], interval = 10;
       for(var key in data){
         //console.log(key);
@@ -18,7 +19,7 @@
           //console.log(item);
           var b = data[key][item];
           //console.log(b);
-          value.push([{'x': interval, 'y': interval, 'r': b[0].Count}]);
+          value.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': randomScalingFactor() > b[0].Count ? b[0].Count : randomScalingFactor()}]);
           i++;
           interval = interval + 10;
           //console.log(value);
@@ -29,6 +30,7 @@
         i = 0;
         interval = 10;
       }
+      //$scope.data = $scope.data_import;
     }
 
     function data_animation(){
@@ -72,11 +74,11 @@
     $scope.options = {
       scales: {
         xAxes: [{
-          display: true,
+          display: false,
           ticks: {
             max: 800,
             min:-800,
-            stepSize: 100
+            stepSize: 1
           }
         }],
         yAxes: [{
@@ -84,7 +86,7 @@
           ticks: {
             max: 1200,
             min: -1200,
-            stepSize: 100
+            stepSize: 1
           }
         }]
       }
@@ -95,7 +97,14 @@
 
     createChart();
     $scope.data = $scope.data_import[1];
-    setTimeout(data_animation, 1000);
+    $interval(function(){
+      createChart();
+      if($scope.value)
+        $scope.data = $scope.data_import[$scope.value];
+      else
+        $scope.data = $scope.data_import[1];
+    }, 2000);
+    //setTimeout(data_animation, 1000);
 
     $scope.ver_data = function(value){
       $scope.value = value;
@@ -113,6 +122,16 @@
         });
       }, 1000);
     };
+
+    function randomScalingFactor () {
+      console.log((Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 400));
+      return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 400);
+    }
+
+    function randomRadius () {
+      console.log(Math.abs(randomScalingFactor()) / 4);
+      return Math.abs(randomScalingFactor()) / 4;
+    }
     /*$scope.data = [[{x: 40, y: 10, r: 20}],[{x: 10, y: 40, r: 50}]];*/
   }
 
