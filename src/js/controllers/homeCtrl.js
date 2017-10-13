@@ -6,33 +6,73 @@
     var vm = this;
 
     var data = Datos_Politicos;
-    $scope.politik = 'CFK';
+    $scope.politik = 'Todos';
+    $scope.colors = [];
+    $scope.data = [];
     //console.log(data);
     //$scope.series = ['Serie A', 'Serie B'];
     function createChart(){
       $scope.data_import = [];
       //$scope.data = [];
-      var i = 0, value = [], interval = 10;
+      var i = 0, value = [], interval = 0, data_feel = [];
       for(var key in data){
         //console.log(key);
         for (var item in data[key]) {
           //console.log(item);
           var b = data[key][item];
+          interval = b[0].Count + interval;
+          //value.push(hexToRgb(b[0].Count.toString(16)));
           //console.log(b);
-          value.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': randomScalingFactor() > b[0].Count ? b[0].Count : randomScalingFactor()}]);
-          i++;
-          interval = interval + 10;
+          //value.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': randomScalingFactor() > b[0].Count ? b[0].Count : randomScalingFactor()}]);
+          //i++;
+          //interval = interval + 10;
           //console.log(value);
         }
-        //console.log(value);
+        console.log(interval);
+        data_feel.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': 100}]);
+        value.push(hexToRgbA('#'+interval.toString(16)));
         $scope.data_import.push(value);
         value = [];
-        i = 0;
-        interval = 10;
+        i++;
+        interval = 0;
       }
+      set_data(data_feel);
       //$scope.data = $scope.data_import;
     }
 
+    function hexToRgb(hex){
+      hex = hex.replace(/[^0-9A-F]/, '');
+      var bigint = parseInt(hex, 16);
+      var r = (bigint >> 16) & 255;
+      var g = (bigint >> 8) & 255;
+      var b = bigint & 255;
+
+      return [r, g, b].join();
+    }
+
+    function hexToRgbA(hex){
+      var c;
+      if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+        c= hex.substring(1).split('');
+        if(c.length== 3){
+            c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+        }
+        c= '0x'+c.join('');
+        return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',1)';
+      }
+      throw new Error('Bad Hex');
+    }
+
+    createChart();
+    //console.log($scope.data_import);
+    for (var i = 0; i < $scope.data_import.length; i++) {
+      //console.log($scope.data_import[i]);
+      for (var j = 0; j < $scope.data_import[i].length; j++) {
+          $scope.colors.push($scope.data_import[i][j]);
+      }
+    }
+    console.log('Imprimimos colores');
+    console.log($scope.colors);
     function data_animation(){
       setInterval(function(){
         var a = $scope.data;
@@ -47,15 +87,17 @@
       setTimeout(function(){
         $scope.$apply(function(){
           //$scope.data = $scope.data_import[value];
-          $scope.data.push(data);
+          $scope.data = data;
+          console.log('Imprimimos los datos');
+          console.log($scope.data);
         });
-      }, 100);
+      }, 1000);
     }
     //console.log($scope.labels);
     //console.log($scope.data);
-    $scope.series = ['Total Positive', 'Total Negative', 'Total Anger',
-      'Total Anticipation', 'Total Disgust', 'Total Fear',
-      'Total Joy', 'Total Sadness', 'Total Surprise', 'Total Trust'
+    $scope.series = ['Positive', 'Negative', 'Anger',
+      'Anticipation', 'Disgust', 'Fear',
+      'Joy', 'Sadness', 'Surprise', 'Trust'
     ];
     /*$scope.datasetOverride = [
       {
@@ -74,7 +116,7 @@
     $scope.options = {
       scales: {
         xAxes: [{
-          display: false,
+          display: true,
           ticks: {
             max: 800,
             min:-800,
@@ -95,19 +137,20 @@
     //$scope.series = ['Series A', 'Series B'];
     $scope.dataOverride = [];
 
-    createChart();
-    $scope.data = $scope.data_import[1];
-    $interval(function(){
+    //createChart();
+    //$scope.data = $scope.data_import[1];
+    /*$interval(function(){
       createChart();
       if($scope.value)
         $scope.data = $scope.data_import[$scope.value];
       else
         $scope.data = $scope.data_import[1];
-    }, 2000);
+    }, 2000);*/
     //setTimeout(data_animation, 1000);
 
     $scope.ver_data = function(value){
       $scope.value = value;
+      createChart();
       if(value == 1)
         $scope.politik = 'CFK';
       if(value === 0)
@@ -118,18 +161,19 @@
         $scope.politik = 'Massa';
       setTimeout(function(){
         $scope.$apply(function(){
-          $scope.data = $scope.data_import[value];
+          set_data($scope.data[value]);
+          //$scope.data = $scope.data[value];
         });
       }, 1000);
     };
 
     function randomScalingFactor () {
-      console.log((Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 400));
+      //console.log((Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 400));
       return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 400);
     }
 
     function randomRadius () {
-      console.log(Math.abs(randomScalingFactor()) / 4);
+      //console.log(Math.abs(randomScalingFactor()) / 4);
       return Math.abs(randomScalingFactor()) / 4;
     }
     /*$scope.data = [[{x: 40, y: 10, r: 20}],[{x: 10, y: 40, r: 50}]];*/
