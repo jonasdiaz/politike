@@ -6,41 +6,46 @@
     var vm = this;
 
     var data = Datos_Politicos;
-    $scope.politik = 'Todos';
-    $scope.colors = [];
+    $scope.series = ['Anger', 'Fear', 'Joy', 'Sadness', 'Trust'];
+    $scope.politik = 'CFK';
+    $scope.colors_palet = ['#D50606', '#8013DA', '#F0E919', '#009FFA', '#17DC03'];
     $scope.data = [];
+    $scope.colors = [];
+    agregar_colores(data);
     //console.log(data);
     //$scope.series = ['Serie A', 'Serie B'];
     function createChart(){
       $scope.data_import = [];
       //$scope.data = [];
-      var i = 0, value = [], interval = 0, data_feel = [];
+      var i = 0, value = [], interval = 0;
       for(var key in data){
         //console.log(key);
         for (var item in data[key]) {
           //console.log(item);
           var b = data[key][item];
-          interval = b[0].Count + interval;
+          //interval = b[0].Count + interval;
           //value.push(hexToRgb(b[0].Count.toString(16)));
           //console.log(b);
           //value.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': randomScalingFactor() > b[0].Count ? b[0].Count : randomScalingFactor()}]);
+          interval = interval + 10;
+          value.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': b[0].Count, 'color': b[0].color}]);
           //i++;
-          //interval = interval + 10;
           //console.log(value);
         }
-        console.log(interval);
-        data_feel.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': 100}]);
-        value.push(hexToRgbA('#'+interval.toString(16)));
+        //console.log(interval);
+        //data_feel.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': 100}]);
+        //value.push(hexToRgbA('#'+interval.toString(16)));
         $scope.data_import.push(value);
         value = [];
         i++;
         interval = 0;
       }
-      set_data(data_feel);
+      reorder_data();
+      //set_data(data_feel);
       //$scope.data = $scope.data_import;
     }
 
-    function hexToRgb(hex){
+    /*function hexToRgb(hex){
       hex = hex.replace(/[^0-9A-F]/, '');
       var bigint = parseInt(hex, 16);
       var r = (bigint >> 16) & 255;
@@ -61,18 +66,41 @@
         return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',1)';
       }
       throw new Error('Bad Hex');
+    }*/
+
+    function reorder_data(){
+      $scope.data_import.sort(function(a){
+        a = reorder(a);
+      });
     }
 
-    createChart();
+    function reorder(item){
+      var i = 0;
+      item.sort(function(a, b){
+        if(a[i].hasOwnProperty('r') && b[i].hasOwnProperty('r')){
+          var nombreA = a[i].r, nombreB = b[i].r;
+          if(nombreA < nombreB)
+            return -1;
+          if(nombreA > nombreB)
+            return 1;
+          return 0;
+        }else
+          console.log('JIJIJIJIJIJI');
+        i++;
+      });
+      return item;
+    }
+
+    //createChart();
     //console.log($scope.data_import);
-    for (var i = 0; i < $scope.data_import.length; i++) {
+    /*for (var i = 0; i < $scope.data_import.length; i++) {
       //console.log($scope.data_import[i]);
       for (var j = 0; j < $scope.data_import[i].length; j++) {
           $scope.colors.push($scope.data_import[i][j]);
       }
-    }
-    console.log('Imprimimos colores');
-    console.log($scope.colors);
+    }*/
+    //console.log('Imprimimos colores');
+    //console.log($scope.colors);
     function data_animation(){
       setInterval(function(){
         var a = $scope.data;
@@ -83,22 +111,51 @@
       }, 2000);
     }
 
+    function agregar_colores(data){
+      var i = 0;
+      for(var key in data){
+        for (var item in data[key]) {
+          var b = data[key][item];
+          b[0].color = $scope.colors_palet[i];
+          i++;
+        }
+        i = 0;
+      }
+    }
+
     function set_data(data){
       setTimeout(function(){
         $scope.$apply(function(){
           //$scope.data = $scope.data_import[value];
           $scope.data = data;
-          console.log('Imprimimos los datos');
-          console.log($scope.data);
+          //console.log('Imprimimos los datos');
+          //console.log($scope.data);
         });
       }, 1000);
     }
+
+    function coloreamos(array){
+      var i = 0;
+      for(var key in data){
+        for (var item in data[key]) {
+          var b = data[key][item];
+          $scope.colors.push(
+            {
+                backgroundColor: b[0].color,
+                fillColor:   b[0].color,
+                strokeColor:   b[0].color,
+                highlightFill:   b[0].color,
+                highlightStroke:   b[0].color
+            }
+          );
+          //console.log(b[0].color);
+          i++;
+        }
+        i = 0;
+      }
+    }
     //console.log($scope.labels);
     //console.log($scope.data);
-    $scope.series = ['Positive', 'Negative', 'Anger',
-      'Anticipation', 'Disgust', 'Fear',
-      'Joy', 'Sadness', 'Surprise', 'Trust'
-    ];
     /*$scope.datasetOverride = [
       {
         label: "Bar chart",
@@ -116,7 +173,7 @@
     $scope.options = {
       scales: {
         xAxes: [{
-          display: true,
+          display: false,
           ticks: {
             max: 800,
             min:-800,
@@ -137,8 +194,9 @@
     //$scope.series = ['Series A', 'Series B'];
     $scope.dataOverride = [];
 
-    //createChart();
-    //$scope.data = $scope.data_import[1];
+    createChart();
+    $scope.data = $scope.data_import[1];
+    coloreamos($scope.data);
     /*$interval(function(){
       createChart();
       if($scope.value)
@@ -149,8 +207,8 @@
     //setTimeout(data_animation, 1000);
 
     $scope.ver_data = function(value){
-      $scope.value = value;
-      createChart();
+      //$scope.value = value;
+      //createChart();
       if(value == 1)
         $scope.politik = 'CFK';
       if(value === 0)
@@ -159,10 +217,15 @@
         $scope.politik = 'Randazzo';
       if(value === 3)
         $scope.politik = 'Massa';
+      if(value === 4)
+          $scope.politik = 'Carrio';
+      if(value === 5)
+          $scope.politik = 'Filmus';
       setTimeout(function(){
         $scope.$apply(function(){
-          set_data($scope.data[value]);
-          //$scope.data = $scope.data[value];
+          //set_data($scope.data[value]);
+          //reorder_data();
+          $scope.data = $scope.data_import[value];
         });
       }, 1000);
     };
