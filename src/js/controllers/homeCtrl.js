@@ -6,14 +6,13 @@
     var vm = this;
 
     var data = Datos_Politicos;
-    $scope.series = ['Anger', 'Fear', 'Joy', 'Sadness', 'Trust'];
+    $scope.series = ['Bullrich', 'CFK', 'Randazzo', 'Massa', 'Carrio', 'Filmus'];
     $scope.politik = 'Todos';
     $scope.colors_palet = ['#D50606', '#8013DA', '#F0E919', '#009FFA', '#17DC03'];
     $scope.data = [];
     $scope.colors = [];
-    agregar_colores(data);
+    //agregar_colores(data);
     //console.log(data);
-    //$scope.series = ['Serie A', 'Serie B'];
     function createChartByCandidate(){
       $scope.data_import = [];
       //$scope.data = [];
@@ -26,9 +25,9 @@
           //interval = b[0].Count + interval;
           //value.push(hexToRgb(b[0].Count.toString(16)));
           //console.log(b);
-          //value.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': randomScalingFactor() > b[0].Count ? b[0].Count : randomScalingFactor()}]);
+          value.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': parseInt(Math.sqrt(b[0].Count)) + 30}]);
           interval = interval + 10;
-          value.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': parseInt(Math.sqrt(b[0].Count))}]);
+          //value.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': parseInt(Math.sqrt(b[0].Count))}]);
           //i++;
           //console.log(value);
         }
@@ -64,7 +63,7 @@
       }
       //$scope.data_import.push(uranga);
       //console.log($scope.data_import);
-      reorder_data();
+      //reorder_data();
     }
 
     /*function hexToRgb(hex){
@@ -229,16 +228,15 @@
             stepSize: 1
           }
         }]
-      }
+      },
+      legend: { display: true }
     };
 
-    //$scope.series = ['Series A', 'Series B'];
+    //$scope.series = ['Bullrich', 'CFK', 'Randazzo', 'Massa', 'Carrio', 'Filmus'];
     $scope.dataOverride = [];
-
     createChart();
     $scope.data = $scope.data_import;
-    //console.log($scope.data);
-    //coloreamos($scope.data);
+    coloreamos($scope.data);
     /*$interval(function(){
       createChart();
       if($scope.value)
@@ -267,8 +265,44 @@
         $scope.$apply(function(){
           //set_data($scope.data[value]);
           //reorder_data();
+          $scope.series = ['Anger', 'Fear', 'Joy', 'Sadness', 'Trust'];
           createChartByCandidate();
-          $scope.colors = ['#D50606', '#8013DA', '#F0E919', '#009FFA', '#17DC03'];
+          $scope.colors = [
+            {
+              backgroundColor: '#D50606',
+              fillColor:   '#D50606',
+              strokeColor:   '#D50606',
+              highlightFill:   '#D50606',
+              highlightStroke:   '#D50606'
+            },
+            {
+              backgroundColor: '#8013DA',
+              fillColor:   '#8013DA',
+              strokeColor:   '#8013DA',
+              highlightFill:   '#8013DA',
+              highlightStroke:   '#8013DA'
+            },
+            {
+              backgroundColor: '#F0E919',
+              fillColor:   '#F0E919',
+              strokeColor:   '#F0E919',
+              highlightFill:   '#F0E919',
+              highlightStroke:   '#F0E919'
+            },
+            {
+              backgroundColor: '#009FFA',
+              fillColor:   '#009FFA',
+              strokeColor:   '#009FFA',
+              highlightFill:   '#009FFA',
+              highlightStroke:   '#009FFA'
+            },
+            {
+              backgroundColor: '#17DC03',
+              fillColor:   '#17DC03',
+              strokeColor:   '#17DC03',
+              highlightFill:   '#17DC03',
+              highlightStroke:   '#17DC03'
+            }];
           $scope.data = $scope.data_import[value];
         });
       }, 1000);
