@@ -7,14 +7,14 @@
 
     var data = Datos_Politicos;
     $scope.series = ['Anger', 'Fear', 'Joy', 'Sadness', 'Trust'];
-    $scope.politik = 'CFK';
+    $scope.politik = 'Todos';
     $scope.colors_palet = ['#D50606', '#8013DA', '#F0E919', '#009FFA', '#17DC03'];
     $scope.data = [];
     $scope.colors = [];
     agregar_colores(data);
     //console.log(data);
     //$scope.series = ['Serie A', 'Serie B'];
-    function createChart(){
+    function createChartByCandidate(){
       $scope.data_import = [];
       //$scope.data = [];
       var i = 0, value = [], interval = 0;
@@ -28,7 +28,7 @@
           //console.log(b);
           //value.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': randomScalingFactor() > b[0].Count ? b[0].Count : randomScalingFactor()}]);
           interval = interval + 10;
-          value.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': b[0].Count, 'color': b[0].color}]);
+          value.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': parseInt(Math.sqrt(b[0].Count))}]);
           //i++;
           //console.log(value);
         }
@@ -43,6 +43,28 @@
       reorder_data();
       //set_data(data_feel);
       //$scope.data = $scope.data_import;
+    }
+
+    function createChart(){
+      $scope.data_import = [];
+      var i = 0, value = [], interval = -800, mayor = 0, uranga = [];
+      for(var key in data){
+        for (var item in data[key]) {
+          var b = data[key][item];
+          if(b[0].Count > mayor)
+            mayor = b[0].Count;
+          i++;
+        }
+        $scope.data_import.push({x: interval, y: interval, r: parseInt(Math.sqrt(mayor))});
+        $scope.colors.push($scope.colors_palet[i-1]);
+        //console.log(uranga);
+        //console.log($scope.colors);
+        interval = interval + 150;
+        mayor = 0; i = 0;
+      }
+      //$scope.data_import.push(uranga);
+      //console.log($scope.data_import);
+      reorder_data();
     }
 
     /*function hexToRgb(hex){
@@ -69,12 +91,18 @@
     }*/
 
     function reorder_data(){
-      $scope.data_import.sort(function(a){
-        a = reorder(a);
+      $scope.data_import.sort(function(a, b){
+        if(a.r < b.r)
+          return -1;
+        if(a.r > b.r)
+          return 1;
+        else
+          return 0;
+        //console.log(a);
       });
     }
 
-    function reorder(item){
+    /*function reorder(item){
       var i = 0;
       item.sort(function(a, b){
         if(a[i].hasOwnProperty('r') && b[i].hasOwnProperty('r')){
@@ -89,6 +117,19 @@
         i++;
       });
       return item;
+    }*/
+    function reorder(item){
+      var i = 0, mayor = 0;
+      item.sort(function(value){
+        if(item[i].r > mayor){
+          mayor = item[i].r;
+          return 1;
+        }
+        if(item[i].r < item[i].r)
+          return -1;
+        else
+          return 0;
+      });
     }
 
     //createChart();
@@ -175,8 +216,8 @@
         xAxes: [{
           display: false,
           ticks: {
-            max: 800,
-            min:-800,
+            max: 1200,
+            min:-1200,
             stepSize: 1
           }
         }],
@@ -195,8 +236,9 @@
     $scope.dataOverride = [];
 
     createChart();
-    $scope.data = $scope.data_import[1];
-    coloreamos($scope.data);
+    $scope.data = $scope.data_import;
+    //console.log($scope.data);
+    //coloreamos($scope.data);
     /*$interval(function(){
       createChart();
       if($scope.value)
@@ -225,6 +267,8 @@
         $scope.$apply(function(){
           //set_data($scope.data[value]);
           //reorder_data();
+          createChartByCandidate();
+          $scope.colors = ['#D50606', '#8013DA', '#F0E919', '#009FFA', '#17DC03'];
           $scope.data = $scope.data_import[value];
         });
       }, 1000);
