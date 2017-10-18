@@ -6,7 +6,11 @@
     var vm = this;
 
     var data = Datos_Politicos;
-    $scope.series = ['Bullrich', 'CFK', 'Randazzo', 'Massa', 'Carrio', 'Filmus'];
+    var ura;
+    //$scope.labels = ['Bullrich', 'CFK', 'Randazzo', 'Massa', 'Carrio', 'Filmus'];
+    $scope.series_to = ['Anger', 'Fear', 'Joy', 'Sadness', 'Trust'];
+    $scope.series = [];
+    $scope.labels = [];
     $scope.politik = 'Todos';
     $scope.colors_palet = ['#D50606', '#8013DA', '#F0E919', '#009FFA', '#17DC03'];
     $scope.data = [];
@@ -25,7 +29,15 @@
           //interval = b[0].Count + interval;
           //value.push(hexToRgb(b[0].Count.toString(16)));
           //console.log(b);
-          value.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': parseInt(Math.sqrt(b[0].Count)) + 30}]);
+          value.push(
+            [
+              {
+                'x': randomScalingFactor(),
+                'y': randomScalingFactor(),
+                'r': b[0].Count > 0 ? parseInt(b[0].Count/2) > 250 ? 250 : parseInt(b[0].Count/2) : 0
+              }
+            ]
+          );
           interval = interval + 10;
           //value.push([{'x': randomScalingFactor(), 'y': randomScalingFactor(), 'r': parseInt(Math.sqrt(b[0].Count))}]);
           //i++;
@@ -46,24 +58,46 @@
 
     function createChart(){
       $scope.data_import = [];
-      var i = 0, value = [], interval = -800, mayor = 0, uranga = [];
+      var i = 0, value = [], interval = -800, mayor = 0, uranga = [], color_p;
       for(var key in data){
         for (var item in data[key]) {
           var b = data[key][item];
-          if(b[0].Count > mayor)
+          if(b[0].Count > mayor){
             mayor = b[0].Count;
+            color_p = i;
+          }
           i++;
+          console.log(mayor);
+          console.log(color_p);
         }
-        $scope.data_import.push({x: interval, y: interval, r: parseInt(Math.sqrt(mayor))});
-        $scope.colors.push($scope.colors_palet[i-1]);
+        $scope.data_import.push(
+          {
+            x: interval,
+            y: interval,
+            r: parseInt(Math.sqrt(mayor))
+          }
+        );
+        $scope.colors.push($scope.colors_palet[color_p]);
+        //$scope.series = ['Trust'];
+        if($scope.series.length === 0){
+          $scope.series.push($scope.series_to[i-1]);
+          $scope.labels.push($scope.series_to[i-1]);
+        }
+        for (var h = 0; h < $scope.series.length; h++) {
+          if($scope.series[h] !== $scope.series_to[i-1]){
+            $scope.series.push($scope.series_to[i-1]);
+            $scope.labels.push($scope.series_to[i-1]);
+          }
+        }
         //console.log(uranga);
         //console.log($scope.colors);
         interval = interval + 150;
         mayor = 0; i = 0;
       }
       //$scope.data_import.push(uranga);
-      //console.log($scope.data_import);
       //reorder_data();
+      console.log($scope.data_import);
+      console.log($scope.colors);
     }
 
     /*function hexToRgb(hex){
@@ -210,7 +244,12 @@
         type: 'line'
       }
     ];*/
+    //$scope.series = ['Anger', 'Fear', 'Joy', 'Sadness', 'Trust'];
+    createChart();
+    $scope.data = $scope.data_import;
+    coloreamos($scope.data);
     $scope.options = {
+      responsive: true,
       scales: {
         xAxes: [{
           display: false,
@@ -233,10 +272,8 @@
     };
 
     //$scope.series = ['Bullrich', 'CFK', 'Randazzo', 'Massa', 'Carrio', 'Filmus'];
-    $scope.dataOverride = [];
-    createChart();
-    $scope.data = $scope.data_import;
-    coloreamos($scope.data);
+    //$scope.dataOverride = [];
+    $scope.datasetOverride = [];
     /*$interval(function(){
       createChart();
       if($scope.value)
@@ -247,6 +284,7 @@
     //setTimeout(data_animation, 1000);
 
     $scope.ver_data = function(value){
+      clearInterval(ura);
       //$scope.value = value;
       //createChart();
       if(value == 1)
@@ -261,51 +299,17 @@
           $scope.politik = 'Carrio';
       if(value === 5)
           $scope.politik = 'Filmus';
-      setTimeout(function(){
+      ura = setInterval(function(){
         $scope.$apply(function(){
           //set_data($scope.data[value]);
           //reorder_data();
           $scope.series = ['Anger', 'Fear', 'Joy', 'Sadness', 'Trust'];
           createChartByCandidate();
-          $scope.colors = [
-            {
-              backgroundColor: '#D50606',
-              fillColor:   '#D50606',
-              strokeColor:   '#D50606',
-              highlightFill:   '#D50606',
-              highlightStroke:   '#D50606'
-            },
-            {
-              backgroundColor: '#8013DA',
-              fillColor:   '#8013DA',
-              strokeColor:   '#8013DA',
-              highlightFill:   '#8013DA',
-              highlightStroke:   '#8013DA'
-            },
-            {
-              backgroundColor: '#F0E919',
-              fillColor:   '#F0E919',
-              strokeColor:   '#F0E919',
-              highlightFill:   '#F0E919',
-              highlightStroke:   '#F0E919'
-            },
-            {
-              backgroundColor: '#009FFA',
-              fillColor:   '#009FFA',
-              strokeColor:   '#009FFA',
-              highlightFill:   '#009FFA',
-              highlightStroke:   '#009FFA'
-            },
-            {
-              backgroundColor: '#17DC03',
-              fillColor:   '#17DC03',
-              strokeColor:   '#17DC03',
-              highlightFill:   '#17DC03',
-              highlightStroke:   '#17DC03'
-            }];
+          $scope.colors = ['#D50606', '#8013DA', '#F0E919', '#009FFA', '#17DC03'];
           $scope.data = $scope.data_import[value];
+          console.log($scope.data);
         });
-      }, 1000);
+      }, 4000);
     };
 
     function randomScalingFactor () {

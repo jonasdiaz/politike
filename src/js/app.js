@@ -1,9 +1,11 @@
 (function(){
   'use strict';
 
-  function config ($locationProvider, $routeProvider) {
+  function config ($locationProvider, $routeProvider, ChartJsProvider) {
     $locationProvider.html5Mode(true);
-
+    ChartJsProvider.setOptions({
+      tooltips: { enabled: false }
+    });
     $routeProvider
       .when('/', {
         templateUrl: 'views/home.tpl.html',
