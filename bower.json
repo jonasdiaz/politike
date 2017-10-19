@@ -2,10 +2,11 @@
   "name": "tens_mobile",
   "private": "true",
   "devDependencies": {
-    "bootstrap": "^3.3.7",
     "angular": "^1.6.6",
     "angular-route": "^1.6.6",
-    "angular-chart.js": "^1.1.1"
+    "angular-chart.js": "^1.1.1",
+    "jquery-easing": "*",
+    "bootstrap": "v4.0.0-beta"
   },
   "dependencies": {}
 }

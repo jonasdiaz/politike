@@ -67,8 +67,8 @@
             color_p = i;
           }
           i++;
-          console.log(mayor);
-          console.log(color_p);
+          //console.log(mayor);
+          //console.log(color_p);
         }
         $scope.data_import.push(
           {
@@ -96,8 +96,8 @@
       }
       //$scope.data_import.push(uranga);
       //reorder_data();
-      console.log($scope.data_import);
-      console.log($scope.colors);
+      //console.log($scope.data_import);
+      //console.log($scope.colors);
     }
 
     /*function hexToRgb(hex){
@@ -307,7 +307,7 @@
           createChartByCandidate();
           $scope.colors = ['#D50606', '#8013DA', '#F0E919', '#009FFA', '#17DC03'];
           $scope.data = $scope.data_import[value];
-          console.log($scope.data);
+          //console.log($scope.data);
         });
       }, 4000);
     };

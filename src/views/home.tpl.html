@@ -1,4 +1,4 @@
-<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+<!--<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
       <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -7,28 +7,32 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">{{politik}}</span></a>
+            <a class="nav-link" href="#">Inicio <span class="sr-only">{{politik}}</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Settings</a>
+            <a class="nav-link" href="#">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Help</a>
+            <a class="nav-link" href="#">Contact</a>
           </li>
         </ul>
-        <form class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+      </div>
+    </nav>-->
+    <!--<nav class="navbar navbar-inverse" role="tablist">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">LOGO</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#inicio">INICIO</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
       </div>
     </nav>
-
     <div class="container-fluid">
-      <div class="row">
-        <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+      <div class="row" id="inicio">-->
+        <!--<nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
               <a class="nav-link active" href="#" ng-click="ver_data(1)">CFK <span class="sr-only">(current)</span></a>
@@ -49,192 +53,186 @@
               <a class="nav-link" href="#" ng-click="ver_data(5)">Filmus</a>
             </li>
           </ul>
-
-          <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Nav item</a>
+        </nav>-->
+        <!--<div class="col-sm-3 col-md-2 hidden-xs-down">
+          <ul class="list-group">
+            <li class="list-group-item" ng-click="ver_data(1)">
+              <img src="http://via.placeholder.com/50x50" class="img-circle" alt="125x125">
+              CFK
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Nav item again</a>
+            <li class="list-group-item" ng-click="ver_data(0)">
+              <img src="http://via.placeholder.com/50x50" class="img-circle" alt="125x125">
+              Bullrich
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">One more nav</a>
+            <li class="list-group-item" ng-click="ver_data(2)">
+              <img src="http://via.placeholder.com/50x50" class="img-circle" alt="125x125">
+              Randazo
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Another nav item</a>
+            <li class="list-group-item" ng-click="ver_data(3)">
+              <img src="http://via.placeholder.com/50x50" class="img-circle" alt="125x125">
+              Massa
+            </li>
+            <li class="list-group-item" ng-click="ver_data(4)">
+              <img src="http://via.placeholder.com/50x50" class="img-circle" alt="125x125">
+              Carrio
+            </li>
+            <li class="list-group-item" ng-click="ver_data(5)">
+              <img src="http://via.placeholder.com/50x50" class="img-circle" alt="125x125">
+              Filmus
             </li>
           </ul>
-
-          <!--<ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Nav item again</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">One more nav</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Another nav item</a>
-            </li>
-          </ul>-->
-        </nav>
-
-        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+        </div>
+        <div class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
           <h1>{{politik}}</h1>
-
           <section class="row text-center placeholders">
-            <!--<div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <div class="text-muted">Something else</div>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>-->
             <canvas id="base" class="chart-bubble" chart-data="data" chart-colors="colors" chart-labels="labels"
               chart-series="series" chart-options="options" chart-dataset-override="dataOverride">
             </canvas>
           </section>
-
-          <!--<h2>Section title</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>ante</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>nisi</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>sem</td>
-                  <td>at</td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>nibh</td>
-                  <td>elementum</td>
-                  <td>imperdiet</td>
-                  <td>Duis</td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
-                  <td>Praesent</td>
-                  <td>mauris</td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>Fusce</td>
-                  <td>nec</td>
-                  <td>tellus</td>
-                  <td>sed</td>
-                </tr>
-                <tr>
-                  <td>1,009</td>
-                  <td>augue</td>
-                  <td>semper</td>
-                  <td>porta</td>
-                  <td>Mauris</td>
-                </tr>
-                <tr>
-                  <td>1,010</td>
-                  <td>massa</td>
-                  <td>Vestibulum</td>
-                  <td>lacinia</td>
-                  <td>arcu</td>
-                </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  <td>Class</td>
-                  <td>aptent</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
-                  <td>ad</td>
-                  <td>litora</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>nostra</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>Curabitur</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>libero</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>-->
-        </main>
+        </div>
       </div>
-    </div>
+      <div class="row" id="about">
+        HOLA
+      </div>
+    </div>-->
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">LOGO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">Datos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#services">Servicios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">Contacto</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="bg-primary text-white" id="page-top">
+      <div class="container text-center">
+        <h1>Bienvenido a latido</h1>
+        <p class="lead">Sentí las emociones que despiertan los candidatos en las redes.</p>
+      </div>
+    </header>
+
+    <section id="about">
+      <div class="container-fluid">
+          <div class="row" id="inicio">
+            <div class="col-md-2">
+              <ul class="list-group">
+                <li class="list-group-item" ng-click="ver_data(1)">
+                  <img src="http://via.placeholder.com/50x50" class="img-circle" alt="125x125">
+                  CFK
+                </li>
+                <li class="list-group-item" ng-click="ver_data(0)">
+                  <img src="http://via.placeholder.com/50x50" class="img-circle" alt="125x125">
+                  Bullrich
+                </li>
+                <li class="list-group-item" ng-click="ver_data(2)">
+                  <img src="http://via.placeholder.com/50x50" class="rounded float-left" alt="125x125">
+                  Randazo
+                </li>
+                <li class="list-group-item" ng-click="ver_data(3)">
+                  <img src="http://via.placeholder.com/50x50" class="img-circle" alt="125x125">
+                  Massa
+                </li>
+                <li class="list-group-item" ng-click="ver_data(4)">
+                  <img src="http://via.placeholder.com/50x50" class="img-circle" alt="125x125">
+                  Carrio
+                </li>
+                <li class="list-group-item" ng-click="ver_data(5)">
+                  <img src="http://via.placeholder.com/50x50" class="img-circle" alt="125x125">
+                  Filmus
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-10">
+              <h1>{{politik}}</h1>
+              <div class="row text-center placeholders">
+                <div class="col-md-12">
+                  <canvas id="base" class="chart-bubble" chart-data="data" chart-colors="colors" chart-labels="labels"
+                    chart-series="series" chart-options="options" chart-dataset-override="dataOverride">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Services we offer</h2>
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut optio velit inventore, expedita quo laboriosam possimus ea consequatur vitae, doloribus consequuntur ex. Nemo assumenda laborum vel, labore ut velit dignissimos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 mx-auto">
+            <div class="inner contact">
+                <!-- Form Area -->
+                <div class="contact-form">
+                    <!-- Form -->
+                    <form id="contact-us" method="post" action="#">
+                        <!-- Left Inputs -->
+                        <div class="col-xs-6 wow animated slideInLeft" data-wow-delay=".5s">
+                            <!-- Name -->
+                            <input type="text" name="name" id="name" required="required" class="form" placeholder="Name" />
+                            <!-- Email -->
+                            <input type="email" name="mail" id="mail" required="required" class="form" placeholder="Email" />
+                            <!-- Subject -->
+                            <input type="text" name="subject" id="subject" required="required" class="form" placeholder="Subject" />
+                        </div><!-- End Left Inputs -->
+                        <!-- Right Inputs -->
+                        <div class="col-xs-6 wow animated slideInRight" data-wow-delay=".5s">
+                            <!-- Message -->
+                            <textarea name="message" id="message" class="form textarea"  placeholder="Message"></textarea>
+                        </div><!-- End Right Inputs -->
+                        <!-- Bottom Submit -->
+                        <div class="relative fullwidth col-xs-12">
+                            <!-- Send Button -->
+                            <button type="submit" id="submit" name="submit" class="form-btn semibold">Send Message</button>
+                        </div><!-- End Bottom Submit -->
+                        <!-- Clear -->
+                        <div class="clear"></div>
+                    </form>
+
+                    <!-- Your Mail Message -->
+                    <div class="mail-message-area">
+                        <!-- Message -->
+                        <div class="alert gray-bg mail-message not-visible-message">
+                            <strong>Thank You !</strong> Your email has been delivered.
+                        </div>
+                    </div>
+
+                </div><!-- End Contact Form Area -->
+            </div><!-- End Inner -->
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">By Viveo &copy;</p>
+      </div>
+      <!-- /.container -->
+    </footer>
