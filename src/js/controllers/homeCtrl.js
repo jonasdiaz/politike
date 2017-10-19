@@ -7,7 +7,7 @@
 
     var data = Datos_Politicos;
     var ura;
-    //$scope.labels = ['Bullrich', 'CFK', 'Randazzo', 'Massa', 'Carrio', 'Filmus'];
+    $scope.candidate_colors = ['Bullrich', 'CFK', 'Randazzo', 'Massa', 'Carrio', 'Filmus'];
     $scope.series_to = ['Anger', 'Fear', 'Joy', 'Sadness', 'Trust'];
     $scope.series = [];
     $scope.labels = [];
