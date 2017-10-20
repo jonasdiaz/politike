@@ -2,19 +2,30 @@
 
   'use strict';
 
-  function HomeCtrl($scope, $interval, Datos_Politicos){
+  function HomeCtrl($rootScope, $scope, $interval, Datos_Politicos){
     var vm = this;
 
     var data = Datos_Politicos;
-    var ura;
-    $scope.candidate_colors = ['#F6F30C', '#10DBF2', '#0B3EEB', '#FF4015', '#F6F30C', '#10DBF2'];
-    $scope.series_to = ['Furia', 'Miedo', 'Alegría', 'Tristeza', 'Confianza'];
-    $scope.series = ['Esteban Bullrich', 'Cristina Kirchner', 'Florencio Randazzo', 'Sergio Massa', 'Elisa Carrio', 'Daniel Filmus'];
+    var ura, all_candidates;
+    $scope.massa = '';
+    $scope.randazzo = '';
+    $scope.kirchner = '';
+    $scope.filmus = '';
+    $scope.carrio = '';
+    $scope.bullrich = '';
+    //$scope.candidate_colors = ['#F6F30C', '#10DBF2', '#0B3EEB', '#FF4015', '#F6F30C', '#10DBF2'];
+    $scope.candidate_colors = ['#f4f514', '#f9c73a', '#8ff1f9', '#3bc3f2', '#ff6b06', '#014a85'];
+    $scope.series = ['Esteban Bullrich', 'Elisa Carrio', 'Daniel Filmus', 'Cristina Kirchner', 'Sergio Massa', 'Florencio Randazzo'];
+    //$scope.series_to = ['Enojo', 'Miedo', 'Alegría', 'Tristeza', 'Confianza'];
+    $scope.series_to = ['Confianza', 'Alegría', 'Tristeza', 'Miedo', 'Enojo'];
+    //$scope.series = ['Esteban Bullrich', 'Cristina Kirchner', 'Florencio Randazzo', 'Sergio Massa', 'Elisa Carrio', 'Daniel Filmus'];
     $scope.labels = [];
     $scope.politik = 'Todos';
-    $scope.colors_palet = ['#D50606', '#8013DA', '#F0E919', '#009FFA', '#17DC03'];
+    //$scope.colors_palet = ['#D50606', '#8013DA', '#F0E919', '#009FFA', '#17DC03'];
+    $scope.colors_palet = ['#17DC03', '#F0E919', '#009FFA', '#8013DA', '#D50606'];
     $scope.data = [];
     $scope.colors = [];
+    $rootScope.img = '/img/grisclaro.jpg';
     //agregar_colores(data);
     //console.log(data);
     function createChartByCandidate(){
@@ -74,7 +85,7 @@
         $scope.data_import.push([
           {
             x: interval,
-            y: interval,
+            y: randomScalingFactor(),
             r: parseInt(Math.sqrt(mayor) + 10)
           }
         ]);
@@ -260,7 +271,6 @@
     createChart();
     $scope.data = $scope.data_import;
     coloreamos($scope.data);
-    console.log($scope.series);
     $scope.options = {
       responsive: true,
       scales: {
@@ -281,8 +291,14 @@
           }
         }]
       },
-      legend: { display: true }
+      legend: {display: true}
     };
+
+    all_candidates = $interval(function(){
+      createChart();
+      $scope.data = $scope.data_import;
+      coloreamos($scope.data);
+    }, 2000);
 
     //$scope.series = ['Bullrich', 'CFK', 'Randazzo', 'Massa', 'Carrio', 'Filmus'];
     //$scope.dataOverride = [];
@@ -298,27 +314,72 @@
 
     $scope.ver_data = function(value){
       clearInterval(ura);
+      $interval.cancel(all_candidates);
       //$scope.value = value;
       //createChart();
-      if(value == 1)
+      if(value == 1){
         $scope.politik = 'CFK';
-      if(value === 0)
+        $scope.kirchner = 'active';
+        $scope.massa = '';
+        $scope.randazzo = '';
+        $scope.filmus = '';
+        $scope.carrio = '';
+        $scope.bullrich = '';
+      }
+      if(value === 0){
         $scope.politik = 'Bullrich';
-      if(value == 2)
+        $scope.bullrich = 'active';
+        $scope.massa = '';
+        $scope.randazzo = '';
+        $scope.kirchner = '';
+        $scope.filmus = '';
+        $scope.carrio = '';
+      }
+      if(value == 2){
         $scope.politik = 'Randazzo';
-      if(value === 3)
+        $scope.randazzo = 'active';
+        $scope.massa = '';
+        $scope.kirchner = '';
+        $scope.filmus = '';
+        $scope.carrio = '';
+        $scope.bullrich = '';
+      }
+      if(value === 3){
         $scope.politik = 'Massa';
-      if(value === 4)
+        $scope.massa = 'active';
+        $scope.randazzo = '';
+        $scope.kirchner = '';
+        $scope.filmus = '';
+        $scope.carrio = '';
+        $scope.bullrich = '';
+      }
+      if(value === 4){
           $scope.politik = 'Carrio';
-      if(value === 5)
+          $scope.carrio = 'active';
+          $scope.massa = '';
+          $scope.randazzo = '';
+          $scope.kirchner = '';
+          $scope.filmus = '';
+          $scope.bullrich = '';
+      }
+      if(value === 5){
           $scope.politik = 'Filmus';
+          $scope.filmus = 'active';
+          $scope.massa = '';
+          $scope.randazzo = '';
+          $scope.kirchner = '';
+          $scope.carrio = '';
+          $scope.bullrich = '';
+      }
       ura = setInterval(function(){
         $scope.$apply(function(){
+          $rootScope.img = '/img/grisclarosegunda.jpg';
           //set_data($scope.data[value]);
           //reorder_data();
-          $scope.series = ['Furia', 'Miedo', 'Alegría', 'Tristeza', 'Confianza'];
+          $scope.series = ['Enojo', 'Miedo', 'Alegría', 'Tristeza', 'Confianza'];
           createChartByCandidate();
-          $scope.colors = ['#D50606', '#8013DA', '#F0E919', '#009FFA', '#17DC03'];
+          //$scope.colors = ['#D50606', '#8013DA', '#F0E919', '#009FFA', '#17DC03'];
+          $scope.colors = ['#de0000', '#432397', ' #f7e53c', '#3b76eb', '#8cc63f'];
           $scope.data = $scope.data_import[value];
           //console.log($scope.data);
         });
@@ -327,7 +388,7 @@
 
     function randomScalingFactor () {
       //console.log((Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 400));
-      return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 400);
+      return (Math.random() > 0.1 ? 1.0 : -1.0) * Math.round(Math.random() * 400);
     }
 
     function randomRadius () {

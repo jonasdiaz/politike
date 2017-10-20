@@ -9,7 +9,11 @@ header {
 }
 
 section {
-  padding: 150px 0;
+  padding: 30px 0;
+}
+
+#base{
+  margin-top: 40px;
 }
 
 .navbar-dark{
@@ -165,4 +169,54 @@ center{
 input {
     position: relative;
     z-index: 9999;
+}
+
+.footer{
+   position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    line-height: 60px;
+    background-color: #f8f9fa;
+}
+
+.text-muted{
+  text-align: center;
+}
+
+.color{
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+.carrio{
+  background-color: #f9c73a;
+}
+
+.bullrich{
+  background-color: #f4f514;
+}
+
+.massa{
+  background-color: #ff6b06;
+}
+
+.kirchner{
+  background-color: #3bc3f2;
+}
+
+.filmus{
+  background-color: #8ff1f9;
+}
+
+.randazzo{
+  background-color: #014a85;
+}
+
+.active {
+  z-index: 2;
+    color: #fff;
+    background-color: #808080 !important;
+    border-color: #808080 !important;
 }

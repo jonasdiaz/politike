@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <!--endinject-->
   </head>
-  <body>
+  <body style="background-image:url({{img}});background-size: cover;">
     <ng-view></ng-view>
     <script src="/lib/jquery/dist/jquery.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
@@ -33,36 +33,19 @@
     <script src="/js/controllers/homeCtrl.js"></script>
     <!--endinject-->
     <script>
+    function myJsFunc() {
+      location.reload();
+    }
 
-    (function($) {
-      "use strict"; // Start of use strict
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108346109-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-      // Smooth scrolling using jQuery easing
-      $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function() {
-        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-          var target = $(this.hash);
-          target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-          if (target.length) {
-            $('html, body').animate({
-              scrollTop: (target.offset().top - 54)
-            }, 1000, "easeInOutExpo");
-            return false;
-          }
-        }
-      });
-
-      // Closes responsive menu when a scroll trigger link is clicked
-      $('.js-scroll-trigger').click(function() {
-        $('.navbar-collapse').collapse('hide');
-      });
-
-      // Activate scrollspy to add active class to navbar items on scroll
-      $('body').scrollspy({
-        target: '#mainNav',
-        offset: 54
-      });
-
-      })(jQuery); // End of use strict
+      gtag('config', 'UA-108346109-1');
     </script>
   </body>
 </html>
