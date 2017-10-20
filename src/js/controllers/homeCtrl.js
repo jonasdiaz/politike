@@ -7,9 +7,9 @@
 
     var data = Datos_Politicos;
     var ura;
-    $scope.candidate_colors = ['Bullrich', 'CFK', 'Randazzo', 'Massa', 'Carrio', 'Filmus'];
-    $scope.series_to = ['Anger', 'Fear', 'Joy', 'Sadness', 'Trust'];
-    $scope.series = [];
+    $scope.candidate_colors = ['#F6F30C', '#10DBF2', '#0B3EEB', '#FF4015', '#F6F30C', '#10DBF2'];
+    $scope.series_to = ['Furia', 'Miedo', 'Alegría', 'Tristeza', 'Confianza'];
+    $scope.series = ['Esteban Bullrich', 'Cristina Kirchner', 'Florencio Randazzo', 'Sergio Massa', 'Elisa Carrio', 'Daniel Filmus'];
     $scope.labels = [];
     $scope.politik = 'Todos';
     $scope.colors_palet = ['#D50606', '#8013DA', '#F0E919', '#009FFA', '#17DC03'];
@@ -62,37 +62,49 @@
       for(var key in data){
         for (var item in data[key]) {
           var b = data[key][item];
-          if(b[0].Count > mayor){
+          /*if(b[0].Count > mayor){
             mayor = b[0].Count;
             color_p = i;
-          }
-          i++;
+          }*/
+          mayor = mayor + b[0].Count;
+          //i++;
           //console.log(mayor);
           //console.log(color_p);
         }
-        $scope.data_import.push(
+        $scope.data_import.push([
           {
             x: interval,
             y: interval,
-            r: parseInt(Math.sqrt(mayor))
+            r: parseInt(Math.sqrt(mayor) + 10)
           }
-        );
-        $scope.colors.push($scope.colors_palet[color_p]);
+        ]);
+        //$scope.colors.push($scope.colors_palet[color_p]);
+        $scope.colors.push({
+          backgroundColor: $scope.candidate_colors[i],
+          fillColor:   $scope.candidate_colors[i],
+          strokeColor:   $scope.candidate_colors[i],
+          highlightFill:   $scope.candidate_colors[i],
+          highlightStroke:   $scope.candidate_colors[i]
+        });
         //$scope.series = ['Trust'];
-        if($scope.series.length === 0){
-          $scope.series.push($scope.series_to[i-1]);
-          $scope.labels.push($scope.series_to[i-1]);
+        /*if($scope.series.length === 0){
+          setTimeout(function(){
+            $scope.series.push($scope.series_to[i-1]);
+            $scope.labels.push($scope.series_to[i-1]);
+          }, 100);
         }
         for (var h = 0; h < $scope.series.length; h++) {
           if($scope.series[h] !== $scope.series_to[i-1]){
-            $scope.series.push($scope.series_to[i-1]);
-            $scope.labels.push($scope.series_to[i-1]);
+            setTimeout(function(){
+              $scope.series.push($scope.series_to[i-1]);
+              $scope.labels.push($scope.series_to[i-1]);
+            }, 100);
           }
-        }
+        }*/
         //console.log(uranga);
         //console.log($scope.colors);
-        interval = interval + 150;
-        mayor = 0; i = 0;
+        interval = interval + 250;
+        mayor = 0; i++;
       }
       //$scope.data_import.push(uranga);
       //reorder_data();
@@ -248,6 +260,7 @@
     createChart();
     $scope.data = $scope.data_import;
     coloreamos($scope.data);
+    console.log($scope.series);
     $scope.options = {
       responsive: true,
       scales: {
@@ -303,7 +316,7 @@
         $scope.$apply(function(){
           //set_data($scope.data[value]);
           //reorder_data();
-          $scope.series = ['Anger', 'Fear', 'Joy', 'Sadness', 'Trust'];
+          $scope.series = ['Furia', 'Miedo', 'Alegría', 'Tristeza', 'Confianza'];
           createChartByCandidate();
           $scope.colors = ['#D50606', '#8013DA', '#F0E919', '#009FFA', '#17DC03'];
           $scope.data = $scope.data_import[value];
