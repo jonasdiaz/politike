@@ -290,8 +290,7 @@
             stepSize: 1
           }
         }]
-      },
-      legend: {display: true}
+      }
     };
 
     all_candidates = $interval(function(){
@@ -381,6 +380,28 @@
           //$scope.colors = ['#D50606', '#8013DA', '#F0E919', '#009FFA', '#17DC03'];
           $scope.colors = ['#de0000', '#432397', ' #f7e53c', '#3b76eb', '#8cc63f'];
           $scope.data = $scope.data_import[value];
+          $scope.options = {
+            responsive: true,
+            scales: {
+              xAxes: [{
+                display: false,
+                ticks: {
+                  max: 1200,
+                  min:-1200,
+                  stepSize: 1
+                }
+              }],
+              yAxes: [{
+                display: false,
+                ticks: {
+                  max: 1200,
+                  min: -1200,
+                  stepSize: 1
+                }
+              }]
+            },
+            legend: {display: true}
+          };
           //console.log($scope.data);
         });
       }, 4000);
