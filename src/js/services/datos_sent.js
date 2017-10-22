@@ -38,7 +38,7 @@
         [{"Sent":"Joy","Count":94,"_row":"Total Joy"}],
         [{"Sent":"Sadness","Count":60,"_row":"Total Sadness"}],
         //[{"Sent":"Surprise","Count":26,"_row":"Total Surprise"}],
-        [{"Sent":"Trust","Count":225,"_row":"Total Trust"}]]
+        [{"Sent":"Trust","Count":225,"_row":"Total Trust"}]
       ],
       'massa':[
         //[{"Sent":"Positive","Count":706,"_row":"Total Positive"}],
