@@ -29,16 +29,16 @@
         [{"Count":347,"_row":"Total Trust"}]
       ],
       'randazzo': [
-        //[{"Sent":"Positive","Count":330,"_row":"Total Positive"}],
-        //[{"Sent":"Negative","Count":170,"_row":"Total Negative"}],
-        [{"Sent":"Anger","Count":59,"_row":"Total Anger"}],
+        //[[{"Sent":"Positive","Count":331,"_row":"Total Positive"}],
+        //[{"Sent":"Negative","Count":147,"_row":"Total Negative"}],
+        [{"Sent":"Anger","Count":60,"_row":"Total Anger"}],
         //[{"Sent":"Anticipation","Count":94,"_row":"Total Anticipation"}],
         //[{"Sent":"Disgust","Count":47,"_row":"Total Disgust"}],
-        [{"Sent":"Fear","Count":39,"_row":"Total Fear"}],
+        [{"Sent":"Fear","Count":40,"_row":"Total Fear"}],
         [{"Sent":"Joy","Count":94,"_row":"Total Joy"}],
-        [{"Sent":"Sadness","Count":59,"_row":"Total Sadness"}],
+        [{"Sent":"Sadness","Count":60,"_row":"Total Sadness"}],
         //[{"Sent":"Surprise","Count":26,"_row":"Total Surprise"}],
-        [{"Sent":"Trust","Count":223,"_row":"Total Trust"}]
+        [{"Sent":"Trust","Count":225,"_row":"Total Trust"}]]
       ],
       'massa':[
         //[{"Sent":"Positive","Count":706,"_row":"Total Positive"}],
